@@ -1,15 +1,16 @@
-FROM tensorflow/serving:2.8.0
+FROM python:3.10-slim
 
-# Copy model ke direktori model di container dengan struktur yang benar
-COPY kstarid-pipeline/Pusher/pushed_model/12 /models/apple_quality_model/1
+WORKDIR /app
 
-# Set environment variable
-ENV MODEL_NAME=apple_quality_model
-ENV PORT=8501
+# Add this line to install build tools
+RUN apt-get update && apt-get install -y build-essential
 
-# Expose port
-EXPOSE 8501
-EXPOSE 8500
+COPY requirements.txt .
 
-# Start TensorFlow Serving
-CMD tensorflow_model_server --rest_api_port=${PORT} --model_name=${MODEL_NAME} --model_base_path=/models/${MODEL_NAME} 
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 8080
+
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "--workers", "1", "app:app"]

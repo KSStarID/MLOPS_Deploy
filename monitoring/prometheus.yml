@@ -1,13 +1,8 @@
 global:
-  scrape_interval: 15s
-  evaluation_interval: 15s
+  scrape_interval: 60s
 
 scrape_configs:
-  - job_name: "apple_quality_model"
+  - job_name: "flask-app"
+    metrics_path: /metrics
     static_configs:
-      - targets: ["localhost:8501"]
-    metrics_path: "/metrics"
-
-  - job_name: "prometheus"
-    static_configs:
-      - targets: ["localhost:9090"]
+      - targets: ["apple-web-production:8080"]
