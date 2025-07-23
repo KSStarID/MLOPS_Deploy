@@ -36,6 +36,14 @@
             border-radius: 4px;
         }
         
+        .grafana-box {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
         .links {
             margin: 20px 0;
         }
@@ -52,8 +60,16 @@
             text-align: center;
         }
         
+        .links a.grafana {
+            background-color: #28a745;
+        }
+        
         .links a:hover {
-            background-color: #0056b3;
+            opacity: 0.9;
+        }
+        
+        .links a.grafana:hover {
+            background-color: #218838;
         }
         
         .footer {
@@ -88,6 +104,12 @@
             <p>The Prometheus metrics are automatically collected by the prometheus-flask-exporter and can be accessed at the /metrics endpoint.</p>
         </div>
         
+        <div class="grafana-box">
+            <h2>Grafana Dashboard</h2>
+            <p>For better visualization of metrics, we've set up a Grafana dashboard that displays real-time monitoring data.</p>
+            <p>The dashboard includes visualizations for request counts, response times, memory usage, and prediction metrics.</p>
+        </div>
+        
         <h2>Monitored Metrics</h2>
         <ul class="metrics-list">
             <li><strong>app_info</strong> - Basic application information including version</li>
@@ -102,14 +124,15 @@
         <div class="links">
             <a href="/metrics" target="_blank">View Raw Prometheus Metrics</a>
             <a href="/health" target="_blank">Application Health Check</a>
+            <a href="http://localhost:3000" target="_blank" class="grafana">Open Grafana Dashboard</a>
         </div>
         
-        <h2>How to Connect to Prometheus</h2>
-        <p>To view these metrics in Prometheus:</p>
+        <h2>How to Connect to Prometheus & Grafana</h2>
+        <p>To view these metrics:</p>
         <ol>
-            <li>Make sure your Prometheus server is configured to scrape this application</li>
-            <li>The scrape configuration should include the target <code>apple-production-kstarid:8080</code></li>
-            <li>The metrics path should be set to <code>/metrics</code></li>
+            <li>Prometheus is available at <code>http://localhost:9090</code></li>
+            <li>Grafana is available at <code>http://localhost:3000</code> (default login: admin/admin)</li>
+            <li>The ML Model Monitoring dashboard is pre-configured in Grafana</li>
         </ol>
         
         <div class="footer">
